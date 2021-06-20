@@ -1,0 +1,50 @@
+.footer {
+    background-color: #000;
+    padding: .5rem 0;
+}
+
+.copyright {
+    color: gray;
+    font-family: 'Poppins', san-serif;
+    font-size: 1rem;
+}
+
+.footer-categories {
+    padding: 2.5rem 0;
+}
+
+.footer-section-title {
+    font-size: 1.1rem;
+    font-family: 'Poppins', san-serif;
+    font-weight: 600;
+    color: gray;
+    text-transform: uppercase;
+}
+
+.footer-section-title::after {
+    content: '-';
+    display: block;
+    margin-top: 1rem;
+}
+
+.footer-support {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1.5rem;
+}
+
+.footer-support li {
+    margin-bottom: .7rem;
+}
+
+.footer-support li a {
+    text-decoration: none;
+    font-family: 'Poppins', san-serif;
+    font-size: .85rem;
+    color: #999;
+    font-weight: 400;
+}
+
+.footer-support li a:hover {
+    color: #fff;
+}
