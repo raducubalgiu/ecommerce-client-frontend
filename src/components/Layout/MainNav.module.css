@@ -2,9 +2,9 @@
     position: absolute;
     z-index: 1000;
     display: block;
-    min-width: 10rem;
+    min-width: 25rem;
     padding: .5rem 0;
-    margin: 0;
+    margin: 0 -10rem;
     font-size: 1rem;
     color: #212529;
     text-align: left;
@@ -13,4 +13,68 @@
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
+    padding: 1rem;
+}
+
+.main-nav {
+    padding: 5rem !important;
+}
+
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    font-family: "Poppins", san-serif, serif !important;
+    color: rgba(0,0,0,.25);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: .06rem;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    font-weight: 600;
+    color: rgba(0,0,0,.7);
+    transition-duration: .3s;
+}
+
+.nav-link-active {
+    font-weight: 600;
+    color: rgba(0,0,0,.7);
+}
+
+.second-nav {
+    background-color: #f1f1f1;
+    padding: .5rem;
+    width: 100%;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .55rem .9rem;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(0,0,0,.25);
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    font-family: "Poppins", serif, san-serif;
+}
+
+.icon-header {
+    color: rgba(0,0,0,.6);
+}
+
+.scrolled {
+    position: fixed !important;
+    width: 100% !important;
 }

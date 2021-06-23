@@ -1,0 +1,78 @@
+.hero {
+    height: 50vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../../hero.png');
+    position: relative;
+    background-position: top;
+    overflow: hidden;
+    width: 100%;
+    border-radius: .3rem;
+    margin-top: 1rem;
+}
+
+.hero-caption {
+    position: absolute;
+    left: 10%;
+    top: 80%;
+    transform: translate(-10%, -80%);
+    background: rgba(450, 450, 450, 0.5);
+    padding: 1.5rem 2rem;
+    border-radius: .3rem;
+}
+
+.heading-primary {
+    font-family: 'Poppins', serif, san-serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+.heading-secondary {
+    font-family: 'Poppins',serif, san-serif;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: #212529;
+}
+
+.hero-button {
+    background-color: #ccc;
+    border: none;
+    border-radius: 0;
+    font-family: 'Poppins',serif, san-serif;
+    font-weight: 500;
+    padding: .7rem 1.3rem;
+    margin-top: .5rem;
+    font-size: .85rem;
+    letter-spacing: .03rem;
+    color: #212529;
+}
+
+.hero__button:hover {
+    background-color: #ddd;
+}
+
+@media (max-width: 767.98px) {
+    .hero__caption {
+        padding: 1.5rem 1rem;
+        background: rgba(450, 450, 450, 0.6);
+    }
+
+    .heading-primary {
+        font-size: 1.3rem;
+    }
+
+    .heading-secondary {
+        font-size: .95rem;
+    }
+
+    .hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../../hero-mobile.png');
+    }
+
+    .hero__button {
+        font-size: .8rem;
+        margin-top: .5rem;
+        padding: .5rem 1rem;
+    }
+}

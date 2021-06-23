@@ -40,6 +40,9 @@ const Footer = () => {
 
                         <div className="col-md">
                             <h3 className={classes['footer-section-title']}>Social Media</h3>
+                            <div className="d-flex">
+
+                            </div>
                         </div>
                     </div>
                 </div>

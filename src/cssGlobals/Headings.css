@@ -1,0 +1,12 @@
+.heading-section {
+    font-size: 1.8rem;
+    font-family: 'Poppins', serif, san-serif;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 1rem;
+}
+
+.heading-section::after {
+    content: '-';
+    display: block;
+}
