@@ -2,7 +2,7 @@
     height: 50vh;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../../hero.png');
+    background-image: url('../../hero.png');
     position: relative;
     background-position: top;
     overflow: hidden;
@@ -16,8 +16,8 @@
     left: 10%;
     top: 80%;
     transform: translate(-10%, -80%);
-    background: rgba(450, 450, 450, 0.5);
-    padding: 1.5rem 2rem;
+    background: rgba(450, 450, 450, 0.7);
+    padding: 2rem 2.5rem;
     border-radius: .3rem;
 }
 
@@ -36,16 +36,14 @@
 }
 
 .hero-button {
-    background-color: #ccc;
-    border: none;
-    border-radius: 0;
-    font-family: 'Poppins',serif, san-serif;
-    font-weight: 500;
-    padding: .7rem 1.3rem;
-    margin-top: .5rem;
-    font-size: .85rem;
-    letter-spacing: .03rem;
-    color: #212529;
+    border: #0dcaf0!important;
+    background-color: #0dcaf0!important;
+    padding: .6rem 1rem;
+    border-radius: .3rem;
+    font-family: "Poppins", serif, san-serif;
+    color: #fff;
+    font-weight: 400;
+    font-size: .95rem;
 }
 
 .hero__button:hover {

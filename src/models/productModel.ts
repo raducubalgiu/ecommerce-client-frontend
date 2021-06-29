@@ -7,4 +7,7 @@ export interface Product {
     category_id:number;
     subcategory_id:number;
     brand_id:number;
+    brand:any;
+    loading:boolean;
+    error:null | string;
 }

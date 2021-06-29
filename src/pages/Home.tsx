@@ -4,18 +4,32 @@ import Hero from "../components/Layout/Hero";
 import ProductsCategories from "../components/Products/ProductsCategories";
 import ProductsLatest from "../components/Products/ProductsLatest";
 import {useHttpGet} from "../api/use-http";
+import ShippingSection from "../components/Home/ShippingSection";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
 
     const applyProducts = (data:any) => setProducts(data);
-    useHttpGet('products', applyProducts);
+    const { loading, error } = useHttpGet('products', applyProducts);
+
+    console.log(products);
 
     return (
         <Layout>
             <Hero />
-            <ProductsCategories products={products} />
-            <ProductsLatest />
+
+            <ShippingSection />
+
+            <ProductsCategories
+                products={products}
+                loading={loading}
+                error={error}
+            />
+            <ProductsLatest
+                products={products}
+                loading={loading}
+                error={error}
+            />
         </Layout>
     );
 };

@@ -1,5 +1,5 @@
 .form-login {
-    min-width: 10rem !important;
+    min-width: 23rem !important;
 }
 
 .card-header {
@@ -27,4 +27,16 @@
     font-weight: 500;
     border: 0;
     background: transparent;
+}
+
+.btn-go {
+    border: #0dcaf0!important;
+    background-color: #0dcaf0!important;
+    padding: .6rem 1rem;
+    border-radius: .3rem;
+    width: 100%;
+    font-family: "Poppins", serif, san-serif;
+    color: #fff;
+    font-weight: 500;
+    font-size: .95rem;
 }

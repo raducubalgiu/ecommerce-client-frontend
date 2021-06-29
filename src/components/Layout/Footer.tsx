@@ -1,6 +1,8 @@
 import React from 'react';
 import classes from './Footer.module.css';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookSquare, faTwitter, faFacebookMessenger, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
     return (
@@ -40,9 +42,31 @@ const Footer = () => {
 
                         <div className="col-md">
                             <h3 className={classes['footer-section-title']}>Social Media</h3>
-                            <div className="d-flex">
-
+                            <div className="d-flex align-items-center mt-4">
+                                <Link to="#"><FontAwesomeIcon className={classes['icon-brand']} icon={faFacebookSquare} /></Link>
+                                <Link to="#"><FontAwesomeIcon className={classes['icon-brand']} icon={faTwitter} /></Link>
+                                <Link to="#"><FontAwesomeIcon className={classes['icon-brand']} icon={faInstagram} /></Link>
+                                <Link to="#"><FontAwesomeIcon className={classes['icon-brand']} icon={faFacebookMessenger} /></Link>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="d-flex align-items-center justify-content-center p-5">
+                            <div className={classes.newsletter}>
+                                <p className={classes['newsletter-title']}>Subscribe to our newsletter</p>
+                                <p className={classes['newsletter-description']}>And stay informed about our news and events</p>
+                            </div>
+
+                            <div className="newsletter-form">
+                                <form>
+                                    <div className="input-group">
+                                        <input className="form-control" type="email" placeholder="email" />
+                                        <button className="btn btn-dark border-left" type="submit">Subscribe</button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

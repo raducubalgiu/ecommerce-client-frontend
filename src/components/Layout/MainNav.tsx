@@ -1,13 +1,20 @@
-import React, {useReducer, useState, useEffect} from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, {useReducer, useState} from 'react';
+import {NavLink, Link} from 'react-router-dom';
 import classes from './MainNav.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from 'react-router-dom';
 import LoginForm from "./LoginForm";
+import {connect} from "react-redux";
+import {User} from "../../models/userModel";
+import {useHttpGet} from "../../api/use-http";
+import {SupercategoriesModel} from "../../models/supercategoriesModel";
+import SecondNav from "./SecondNav";
 
-const MainNav = () => {
-    const [scrolled, setScrolled] = useState(false);
+const MainNav = (props: { user: User; }) => {
+    const location = useLocation();
 
+    // User reducer for displaying or hiding the cart, favorites, login
     const [show, dispatchShow] = useReducer((state: any, action:any) => {
         switch (action.type) {
             case 'SHOW_LOGIN':
@@ -29,8 +36,7 @@ const MainNav = () => {
             showLogin: false,
             showFavorites: false,
             showCart: false
-        }
-    );
+        });
 
     const showLoginHandler = () => { dispatchShow({type: 'SHOW_LOGIN'}) }
     const hideLoginHandler = () => { dispatchShow({type: 'HIDE_LOGIN'}) }
@@ -39,38 +45,86 @@ const MainNav = () => {
     const showCartHandler = () => { dispatchShow({type: 'SHOW_CART'}) }
     const hideCartHandler = () => { dispatchShow({ type: 'HIDE_CART'}) }
 
-    const handleScroll = () => {
-        const offset = window.scrollY;
-
-        if(offset > 200 ){
-            setScrolled(true);
-        }
-        else {
-            setScrolled(false);
-        }
+    const logoutHandler = async () => {
+        const response = await fetch('http://localhost:8000/api/subscriber/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        await response.json();
     }
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-    });
+    // Checking the path  - login or register
+    let isLogin;
+    if(location.pathname === '/login' || location.pathname === '/register') {
+        isLogin = true;
+    }
 
-    let navBarClasses = scrolled ? "d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" : "d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start";
-    let container = scrolled ? 'container-fluid position-fixed bg-white shadow' : 'container';
+    let favorites = (
+        <div className="not-logged-in text-center">
+            <p className={classes['login-text']}>You must be logged in.</p>
+            <Link className="btn btn-sm btn-warning" to="/login">Login</Link>
+        </div>
+    );
+
+    if(props.user?.id) {
+        favorites = (
+            <>
+                <ul className={classes.scrollbar}>
+                    <li><Link className="dropdown-item" to="#">New project...</Link></li>
+                    <li><Link className="dropdown-item" to="#">Settings</Link></li>
+                    <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                    <li><Link className="dropdown-item" to="#">Sign out</Link></li>
+                </ul>
+                <button className={classes['btn-go']}>Go to favorites</button>
+            </>
+        )
+    }
+
+    let cart = (
+        <div className="not-logged-in text-center">
+            <p className={classes['login-text']}>Your must be logged in.</p>
+            <Link className="btn btn-sm btn-warning" to="/login">Login</Link>
+        </div>
+    );
+
+    if(props.user?.id) {
+        cart = (
+            <>
+                <ul className={classes.scrollbar}>
+                    <li><Link className="dropdown-item" to="#">New project...</Link></li>
+                    <li><Link className="dropdown-item" to="#">Settings</Link></li>
+                    <li><Link className="dropdown-item" to="#">Profile</Link></li>
+                    <li><Link className="dropdown-item" to="#">Sign out</Link></li>
+                </ul>
+                <button className={classes['btn-go']}>Go to cart</button>
+            </>
+        );
+    }
+
+    let userInfo = <LoginForm />;
+    if(props.user?.id) {
+        userInfo = (
+            <ul className={classes['user-information']}>
+                <li><Link to="/profile" className="dropdown-item">My Account</Link></li>
+                <li><Link onClick={logoutHandler} to={"/login"} className="dropdown-item"><strong>Sign out</strong></Link></li>
+            </ul>
+        );
+    }
 
     return (
         <header>
-            <div className={container} style={{zIndex: 1000}}>
-                <div className={navBarClasses} style={{width: '100%'}}>
+            <div className="container" style={{zIndex: 1000}}>
+                <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start" style={{width: '100%'}}>
                     <Link to={"/"} className="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                        <img src={"/images/logo.svg"} width={100} alt="logo" />
+                        FashionStore
                     </Link>
 
                     <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" style={{marginLeft: '2rem'}}>
                         <li><NavLink exact to={"/"} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Home</NavLink></li>
-                        <li><NavLink to={"/mens"} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Mens</NavLink></li>
-                        <li><NavLink to={"/womens"} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Womens</NavLink></li>
-                        <li><NavLink to={"/boys"} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Boys</NavLink></li>
-                        <li><NavLink to={"/girls"} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Girls</NavLink></li>
+                        <li><NavLink to={`/1/Mens`} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Mens</NavLink></li>
+                        <li><NavLink to={`/2/Womens`} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Womens</NavLink></li>
+                        <li><NavLink to={`/3/Boys`} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Boys</NavLink></li>
+                        <li><NavLink to={`/4/Girls`} className={classes['nav-link']} activeClassName={classes['nav-link-active']}>Girls</NavLink></li>
                     </ul>
 
                     <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -82,17 +136,15 @@ const MainNav = () => {
                             <FontAwesomeIcon className={classes['icon-header']} icon={faHeart}/>
                             <span
                                 className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                                0
-                                <span className="visually-hidden">unread messages</span>
-                              </span>
+                            0
+                          </span>
                         </button>
 
-                        {show.showFavorites && <ul onMouseLeave={hideFavoritesHandler} className={classes['dropdown-menu']}>
-                            <li><Link className="dropdown-item" to="#">New project...</Link></li>
-                            <li><Link className="dropdown-item" to="#">Settings</Link></li>
-                            <li><Link className="dropdown-item" to="#">Profile</Link></li>
-                            <li><Link className="dropdown-item" to="#">Sign out</Link></li>
-                        </ul>}
+                        {show.showFavorites &&
+                            <div onMouseLeave={hideFavoritesHandler} className={classes['dropdown-menu']}>
+                                { favorites }
+                            </div>
+                        }
                     </div>
 
                     <div onMouseLeave={hideCartHandler} className="text-end me-3">
@@ -100,38 +152,34 @@ const MainNav = () => {
                             <FontAwesomeIcon icon={faShoppingCart} className={classes['icon-header']} />
                             <span
                                 className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                                0
-                                <span className="visually-hidden">unread messages</span>
-                              </span>
+                            0
+                          </span>
                         </button>
 
-                        {show.showCart && <ul onMouseLeave={hideCartHandler} className={classes['dropdown-menu']}>
-                            {/* <li><Link className="dropdown-item" to="#">New project...</Link></li>
-                            <li><Link className="dropdown-item" to="#">Settings</Link></li>
-                            <li><Link className="dropdown-item" to="#">Profile</Link></li>
-                            <li><Link className="dropdown-item" to="#">Sign out</Link></li> */}
-                        </ul>}
+                        {show.showCart &&
+                            <div onMouseLeave={hideCartHandler} className={classes['dropdown-menu']}>
+                                { cart }
+                            </div>
+                        }
                     </div>
 
-                    <div onMouseLeave={hideLoginHandler} className="text-end me-3">
+                    {!isLogin && <div onMouseLeave={hideLoginHandler} className="text-end me-3">
                         <Link to={"/login"} onMouseEnter={showLoginHandler} className="btn d-block link-dark text-decoration-none">
                             <FontAwesomeIcon className={classes['icon-header']} icon={faUser}/>
                         </Link>
 
                         {show.showLogin && <ul onMouseLeave={hideLoginHandler} className={classes['dropdown-menu']}>
-                            <LoginForm />
+                            { userInfo }
                         </ul>}
-                    </div>
+                    </div>}
                 </div>
             </div>
 
-            <div className={classes['second-nav']}>
-                <div className="container">
-                    Something
-                </div>
-            </div>
+            <SecondNav />
         </header>
     );
 };
 
-export default MainNav;
+export default connect((state: {user: User}) => ({
+    user: state.user
+}))(MainNav);

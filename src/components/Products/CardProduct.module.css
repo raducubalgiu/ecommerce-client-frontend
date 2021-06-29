@@ -2,7 +2,6 @@
     border: 0;
     cursor:pointer;
     transition: all .4s;
-    margin-top: 2.5rem;
     padding: 1rem;
     border-radius: .3rem;
 }
@@ -26,12 +25,21 @@
     text-decoration: none;
 }
 
+.card-brand {
+    margin-top: .8rem;
+    text-align: left;
+    font-family: "Poppins", serif, san-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: .15rem;
+}
+
 .card-title {
     text-align: left;
     font-family: 'Poppins', serif, san-serif;
     font-size: .95rem;
     font-weight: 400;
-    margin-top: .8rem;
     color: #34383e;
 }
 

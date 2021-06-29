@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Layout from "../components/Layout/Layout";
 
-const Mens = () => {
-
+const Brands = () => {
     return (
         <Layout>
-            Mens Page
+            Brands Page
         </Layout>
     );
 };
 
-export default Mens;
+export default Brands;

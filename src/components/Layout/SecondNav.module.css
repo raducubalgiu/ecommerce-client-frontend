@@ -1,0 +1,86 @@
+.second-nav {
+    width: 100%;
+    background-color: #f1f1f1 !important;
+}
+
+.categories-list {
+    list-style: none;
+    padding: .5rem 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.categories-list li {
+    display: inline-block;
+    margin-right: 2rem;
+    font-family: "Poppins", san-serif, serif;
+    font-size: .88rem;
+}
+
+.card-subcategories {
+    background-color: #fff;
+    border: .1rem solid #ccc;
+    margin: 0 !important;
+    z-index: 1000 !important;
+    left: .75rem !important;
+    position: absolute;
+    width: 98.2%;
+    padding: 2.5rem 0;
+}
+
+.subcategories {
+    border-right: .1rem solid #f1f1f1;
+    padding-left: 2rem;
+    padding-right: 6rem;
+}
+
+.subcategories-title {
+    font-family: "Poppins", serif, san-serif;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.subcategories-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.subcategories-list li {
+    margin-bottom: .85rem;
+}
+
+.subcategories-list li a {
+    font-family: "Poppins", serif, san-serif;
+    font-size: .9rem;
+}
+
+.subcategories-list li a:hover {
+    font-weight: 500;
+}
+
+.brands {
+    border-right: .1rem solid #f1f1f1;
+    padding-left: 2rem;
+    padding-right: 6rem;
+}
+
+.brands-list {
+    list-style: none;
+    padding-left: 0 !important;
+}
+
+.brands-list li {
+    margin-bottom: .85rem;
+    padding-left: 0 !important;
+}
+
+.brands-list li a {
+    font-family: "Poppins", serif, san-serif;
+    font-size: .9rem;
+}
+
+.brands-list a:hover {
+    font-weight: 500;
+}
