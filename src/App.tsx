@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React from 'react';
 import './index.css';
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./pages/Home";
@@ -9,8 +9,10 @@ import {User} from "./models/userModel";
 import Profile from "./pages/Profile";
 import Supercategory from "./pages/Supercategory";
 import Brands from "./pages/Brands";
+import ProductItem from "./components/Products/ProductItem";
+import Products from "./pages/Products";
 
-function App(props: { user: User }) {
+const App = (props: { user: User }) => {
 
   return (
     <BrowserRouter>
@@ -19,7 +21,9 @@ function App(props: { user: User }) {
       <Route path={"/register"} component={Register} />
         <Route path={"/profile"} component={Profile} />
         <Route path={"/brands"} component={Brands} />
-        <Route path={"/:id/:supercategory"} component={Supercategory} />
+        <Route path={"/products"} exact component={Products}/>
+        <Route path={"/products/:productId/:productTitle"} component={ProductItem} />
+        <Route path={"/:id/:supercategory"} exact component={Supercategory} />
     </BrowserRouter>
   );
 }

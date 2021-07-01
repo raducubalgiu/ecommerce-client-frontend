@@ -70,11 +70,13 @@ const ProductsLatest = (props: { products: Product[]; loading:boolean; error:str
                         {!props.loading && catProducts.value.map(product => (
                                 <CardProduct
                                     key={product.id}
+                                    id={product.id}
                                     className="col-md-3 mt-4"
                                     title={product.product_name}
                                     image={product.product_image}
                                     price={product.product_price}
                                     brand={product.brand.name}
+                                    review={product.average_review}
                                 />
                         ))}
                         { props.loading &&

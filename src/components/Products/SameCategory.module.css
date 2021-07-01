@@ -1,0 +1,10 @@
+.section-same-category {
+    padding-bottom: 2.5rem;
+}
+
+.heading-same-category {
+    font-family: "Poppins", serif, san-serif;
+    font-size: 1.1rem;
+    border-bottom: .1rem solid #ccc;
+    padding-bottom: 1rem;
+}

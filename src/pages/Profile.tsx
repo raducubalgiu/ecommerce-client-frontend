@@ -44,9 +44,9 @@ const Profile = () => {
     if(screen.reviews) {
         screenComponent = <Reviews />
     }
-    let settingsClasses = screen.settings ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action";
-    let ordersClasses = screen.orders ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action";
-    let reviewsClasses = screen.reviews ? "list-group-item list-group-item-action active" : "list-group-item list-group-item-action";
+    let settingsClasses = screen.settings ? `${classes['list-group-item']} ${classes['list-group-item-action']} ${classes.active}` : `${classes['list-group-item']} ${classes['list-group-item-action']}`;
+    let ordersClasses = screen.orders ? `${classes['list-group-item']} ${classes['list-group-item-action']} ${classes.active}` : `${classes['list-group-item']} ${classes['list-group-item-action']}`;
+    let reviewsClasses = screen.reviews ? `${classes['list-group-item']} ${classes['list-group-item-action']} ${classes.active}` : `${classes['list-group-item']} ${classes['list-group-item-action']}`;
 
     return (
         <Layout>
@@ -62,7 +62,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="col-8">
-                        <div className="card" >
+                        <div className="card p-3" >
                             { screenComponent }
                         </div>
                     </div>

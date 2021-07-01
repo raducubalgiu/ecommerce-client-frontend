@@ -7,8 +7,6 @@ import { useLocation } from 'react-router-dom';
 import LoginForm from "./LoginForm";
 import {connect} from "react-redux";
 import {User} from "../../models/userModel";
-import {useHttpGet} from "../../api/use-http";
-import {SupercategoriesModel} from "../../models/supercategoriesModel";
 import SecondNav from "./SecondNav";
 
 const MainNav = (props: { user: User; }) => {

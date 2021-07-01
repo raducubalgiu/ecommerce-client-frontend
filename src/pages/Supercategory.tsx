@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useParams} from 'react-router-dom';
 import Layout from "../components/Layout/Layout";
 import {Product} from "../models/productModel";
@@ -6,17 +6,67 @@ import {useHttpGet} from "../api/use-http";
 import CardProduct from "../components/Products/CardProduct";
 import Spinner from "../components/UI/Spinner";
 import ShippingSection from "../components/Home/ShippingSection";
-import classes from "../components/Layout/MainNav.module.css";
+import SortSearch from "../components/Filters/SortSearch";
 
 const Supercategory = () => {
-    const [products, setProducts] = useState<Product[]>([]);
+    const [allProducts, setAllProducts] = useState<Product[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [filters, setFilters] = useState({
+        s: '',
+        sort: ''
+    });
     const { id, supercategory } = useParams<{id:string; supercategory:string}>();
 
     // Fetching products
     const applyProducts = (data: any) => {
-        setProducts(data);
+        setAllProducts(data);
+        setAllProducts(data);
     }
     const { loading } = useHttpGet('products', applyProducts);
+
+    useEffect(() => {
+        let products = allProducts.filter(product => product.supercategory_id.toString() === id);
+
+        let searchProducts = products.filter(p =>
+            p.product_name.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0 ||
+            p.brand.name.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0
+        );
+
+        if(filters.sort === 'biggest') {
+            searchProducts.sort((a, b) => {
+                if(a.product_price > b.product_price) {
+                    return -1;
+                }
+                if(a.product_price < b.product_price) {
+                    return 1;
+                }
+                return 0;
+            });
+        } else if(filters.sort === 'smallest') {
+            searchProducts.sort((a, b) => {
+                if(a.product_price > b.product_price) {
+                    return 1;
+                }
+                if(a.product_price < b.product_price) {
+                    return -1;
+                }
+                return 0;
+            });
+        } else if(filters.sort === 'popularity') {
+            searchProducts.sort((a, b) => {
+                if(a.average_review > b.average_review) {
+                    return -1;
+                }
+                if(a.average_review < b.average_review) {
+                    return 1;
+                }
+                return 0;
+            });
+        }
+
+        setFilteredProducts(searchProducts);
+
+    }, [filters, allProducts, id]);
 
     return (
         <Layout>
@@ -38,34 +88,23 @@ const Supercategory = () => {
                             </ol>
                         </nav>
 
-                        <div className="d-flex align-items-center justify-content-between mb-3">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <label className="input-group-text bg-light" htmlFor="Sort" style={{fontFamily: 'Poppins', color: 'rgba(0,0,0,.6)', fontSize: '.9rem'}}>Sort by</label>
-                                </div>
-                                <select className={classes['custom-select']} style={{fontFamily: 'Poppins', border: '1px solid #ced4da', color: 'rgba(0,0,0,.6)', fontSize: '.9rem'}}>
-                                    <option value="1">Latest</option>
-                                    <option value="2">Popularity</option>
-                                    <option value="3">Smallest Price</option>
-                                    <option value="4">Biggest Price</option>
-                                </select>
-                            </div>
-
-                            <div className="input-search">
-                                <input type="search" className={classes['form-control']} placeholder="Search product..." aria-label="Search" />
-                            </div>
-                        </div>
+                        <SortSearch
+                            filters={filters}
+                            setFilters={setFilters}
+                        />
 
                         <hr />
 
-                        {products.filter(filterProduct => filterProduct.supercategory_id.toString() === id).map(product => (
+                        {filteredProducts.map(product => (
                             <CardProduct
+                                id={product.id}
                                 key={product.id}
                                 className="col-md-4"
                                 title={product.product_name}
                                 image={product.product_image}
                                 price={product.product_price}
                                 brand={product.brand.name}
+                                review={product.average_review}
                             />
                         ))}
                     </div>}

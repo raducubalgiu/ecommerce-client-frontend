@@ -12,8 +12,6 @@ const Home = () => {
     const applyProducts = (data:any) => setProducts(data);
     const { loading, error } = useHttpGet('products', applyProducts);
 
-    console.log(products);
-
     return (
         <Layout>
             <Hero />

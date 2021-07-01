@@ -38,7 +38,7 @@ const ShippingSection = () => {
                                 <FontAwesomeIcon icon={faTruckLoading} />
                             </div>
                             <div className={classes.description}>
-                                <p>Free return 30 days</p>
+                                <p>Best prices ever</p>
                             </div>
                         </div>
                     </div>

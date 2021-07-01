@@ -13,22 +13,14 @@ const SecondNav = () => {
 
     useHttpGet('categories', applyCategories);
 
-    const showCardHandler = () => {
-        setShowCard(true);
-    }
-
-    const hideCardHandler = () => {
-        setShowCard(false);
-    }
-
     return (
         <>
             <div className={classes['second-nav']}>
                 <div className="container">
                     <ul className={classes['categories-list']}>
-                        <li onMouseEnter={showCardHandler}>Clothes</li>
-                        <li onMouseEnter={showCardHandler}>Footwear</li>
-                        <li onMouseEnter={showCardHandler}>Accessories</li>
+                        <li>Clothes</li>
+                        <li>Footwear</li>
+                        <li>Accessories</li>
                         <li><Link to={"/brands"}>Brands</Link></li>
                         <li><Link to={"/latest-products"} className="position-relative">
                                 Latest Products
@@ -42,7 +34,7 @@ const SecondNav = () => {
                 </div>
             </div>
 
-            {showCard && <div onMouseLeave={hideCardHandler} className="container" style={{ marginBottom: '0', position: 'relative' }}>
+            {showCard && <div className="container" style={{ marginBottom: '0', position: 'relative' }}>
                 <div className={classes['card-subcategories']}>
                     <div className="d-flex">
                         <div className={classes.subcategories}>

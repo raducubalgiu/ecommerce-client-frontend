@@ -52,10 +52,10 @@ const LoginForm = (props: {user: User; setUser: (data:any) => void }) => {
     }, applyData);
 
 
-    const authHandler = async (e: SyntheticEvent) => {
+    const authHandler = (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await sendData();
+        sendData();
     }
 
 

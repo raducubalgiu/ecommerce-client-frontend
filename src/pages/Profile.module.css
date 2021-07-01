@@ -7,3 +7,26 @@
     text-transform: uppercase;
     margin-bottom: 2rem;
 }
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .7rem 1.2rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    font-family: "Poppins", serif, san-serif;
+    font-size: .9rem;
+}
+
+.list-group-item-action {
+    width: 100%;
+    color: #495057;
+    text-align: inherit;
+}
+
+.active {
+    background-color: #f1f1f1;
+    font-weight: 500;
+}
